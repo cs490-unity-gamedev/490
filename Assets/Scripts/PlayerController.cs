@@ -30,16 +30,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (firing) {
+            shoot();
+        }
+        // has to be separate from firing, so that the timer can increase when out of combat to allow player to click multiple times to fire
+        if (!canFire) {
+            fireTimer += Time.deltaTime;
+            if (fireTimer >= fireSpeed) {
+                canFire = true;
+                fireTimer = 0;
+            }
+        }
     }
 
     void FixedUpdate() {
         // use for movement
         rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         trackMouse();
-        if (firing) {
-            shoot();
-        }
     }
 
     void OnMove(InputValue value) {
@@ -55,14 +62,6 @@ public class PlayerController : MonoBehaviour
     }
 
     void shoot() {
-        if (!canFire) {
-            fireTimer += Time.deltaTime;
-            if (fireTimer > fireSpeed) {
-                canFire = true;
-                fireTimer = 0;
-            }
-        }
-
         if (canFire) {
             canFire = false;
             GameObject bullet = Instantiate(bulletPrefab, bulletTransform.position, bulletTransform.rotation);
