@@ -15,6 +15,14 @@ public class BulletTravel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * bulletSpeed * Time.deltaTime);
+        transform.Translate(Vector3.down * bulletSpeed * Time.deltaTime);
+    }
+
+    // when bullet hits enemy, destroy both bullet and enemy
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Enemy") {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 }
