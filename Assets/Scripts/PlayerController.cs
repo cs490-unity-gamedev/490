@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = mainCam.ScreenToWorldPoint(lookInput);
 
         Vector3 rotation = mousePos - transform.position;
-        float rotZVal = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) + 90;
+        float rotZVal = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0, 0, rotZVal);
     }
