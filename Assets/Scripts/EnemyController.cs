@@ -5,6 +5,13 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // public Transform player;
+    [SerializeField]
+    private float fireSpeed;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    private Transform leftBulletTransform;
+    private Transform rightBulletTransform;
+
     private GameObject player;
     private Rigidbody2D rb; // reference for this object's Rigidbody2D
     private Vector2 movement;
@@ -17,6 +24,11 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         // use rb to manipulate mvm and rotation of object
         rb = this.GetComponent<Rigidbody2D>();
+
+        // start shooting coroutine
+        leftBulletTransform = gameObject.transform.GetChild(0).transform;
+        rightBulletTransform = gameObject.transform.GetChild(1).transform;
+        StartCoroutine(shoot(fireSpeed));
     }
 
     // Update is called once per frame
@@ -38,5 +50,14 @@ public class EnemyController : MonoBehaviour
 
     void moveCharacter(Vector2 direction) {
         rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+    }
+
+    private IEnumerator shoot(float interval) {
+        yield return new WaitForSeconds(interval);
+
+        Instantiate(bulletPrefab, leftBulletTransform.position, leftBulletTransform.rotation);
+        Instantiate(bulletPrefab, rightBulletTransform.position, rightBulletTransform.rotation);
+
+        StartCoroutine(shoot(interval));
     }
 }
