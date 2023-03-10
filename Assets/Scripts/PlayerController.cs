@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -62,6 +63,8 @@ public class PlayerController : MonoBehaviour
     private void Die() {
         // could instantiate an explosion animation here later
         Destroy(gameObject);
+        // load game over screen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void OnMove(InputValue value) {
