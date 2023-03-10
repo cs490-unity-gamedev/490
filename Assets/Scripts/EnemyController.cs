@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // public Transform player;
+    [SerializeField]
+    private int health = 3;
     [SerializeField]
     private float fireSpeed;
     [SerializeField]
@@ -35,20 +36,35 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         // calculate the direction our player is compared to our enemy obj
-        Vector3 direction = player.transform.position - transform.position;
-        // calculate the angle btwn enemy obj and player obj
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // set RigidBody's rotation
-        rb.rotation = angle;
-        direction.Normalize(); // bc we want movement val to be btwn -1 and 1
-        movement = direction;
+        if (player != null) {
+            Vector3 direction = player.transform.position - transform.position;
+            // calculate the angle btwn enemy obj and player obj
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            // set RigidBody's rotation
+            rb.rotation = angle;
+            direction.Normalize(); // bc we want movement val to be btwn -1 and 1
+            movement = direction;
+        }
     }
 
     private void FixedUpdate() {
         moveCharacter(movement);
     }
 
-    void moveCharacter(Vector2 direction) {
+    public void takeDamage(int damage) {
+        health -= damage;
+        
+        if (health <= 0) {
+            Die();
+        }
+    }
+
+    private void Die() {
+        // could instantiate an explosion animation here later
+        Destroy(gameObject);
+    }
+
+    private void moveCharacter(Vector2 direction) {
         rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
 
