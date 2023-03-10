@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private int health = 5;
     public float moveSpeed = 1f;
     public float lookSpeed = 1f;
     public GameObject bulletPrefab;
@@ -47,6 +49,19 @@ public class PlayerController : MonoBehaviour
         // use for movement
         rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         trackMouse();
+    }
+
+    public void takeDamage(int damage) {
+        health -= damage;
+        
+        if (health <= 0) {
+            Die();
+        }
+    }
+
+    private void Die() {
+        // could instantiate an explosion animation here later
+        Destroy(gameObject);
     }
 
     void OnMove(InputValue value) {

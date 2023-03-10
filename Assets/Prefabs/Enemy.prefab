@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ba70cd67e1443fba7936befc9d4b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   fireSpeed: 0.5
   bulletPrefab: {fileID: 4268803264299375687, guid: 6c349c074d934425dba3928021e5c214, type: 3}
   moveSpeed: 4

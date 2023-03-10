@@ -18,10 +18,10 @@ public class BulletTravel : MonoBehaviour
         transform.Translate(Vector3.down * bulletSpeed * Time.deltaTime);
     }
 
-    // when bullet hits enemy, destroy both bullet and enemy
+    // when bullet hits enemy, deal 1 damage to enemy (health -= 1) and destroy bullet
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Enemy") {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<EnemyController>().takeDamage(1);
             Destroy(gameObject);
         }
     }

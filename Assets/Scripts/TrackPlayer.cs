@@ -22,8 +22,10 @@ public class TrackPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 desiredPosition = player.position + player.rotation * locationOffset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cameraSmoothSpeed);
-        transform.position = smoothedPosition;
+        if (player != null) {
+            Vector3 desiredPosition = player.position + player.rotation * locationOffset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cameraSmoothSpeed);
+            transform.position = smoothedPosition;
+        }
     }
 }
