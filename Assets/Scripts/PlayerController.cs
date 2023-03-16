@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private int health = 5;
+    public static event System.Action onPlayerDamaged;
+    // public static event System.Action onPlayerDeath;
+
+    public float maxHealth = 10;
+    public float currHealth;
     public float moveSpeed = 1f;
     public float lookSpeed = 1f;
     public GameObject bulletPrefab;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        currHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -53,10 +57,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void takeDamage(int damage) {
-        health -= damage;
-        print("health: " + health);
+        currHealth -= damage;
+        onPlayerDamaged?.Invoke();
+        print("health: " + currHealth);
         
-        if (health <= 0) {
+        if (currHealth <= 0) {
             Die();
         }
     }
