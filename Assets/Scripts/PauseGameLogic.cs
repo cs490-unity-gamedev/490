@@ -51,6 +51,7 @@ public class PauseGameLogic : MonoBehaviour
     }
     // TODO: code is repetitive? bc start menu and quit are already in game state logic
     public void restartGame() {
+        Time.timeScale = 1f;
         isPaused = false;
         gameStateLogic.startGame(); // TODO: is it okay to just reload the scene to restart?
     }
