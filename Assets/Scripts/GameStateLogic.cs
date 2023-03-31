@@ -19,4 +19,8 @@ public class GameStateLogic : MonoBehaviour
         // TODO: currently have hard-coded 0
         SceneManager.LoadScene(0);
     }
+
+    public void loadTutorial() {
+        SceneManager.LoadScene("TutorialScene1");
+    }
 }
