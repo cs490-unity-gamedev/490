@@ -1,0 +1,38 @@
+.header {
+    color: rgb(0, 0, 0);
+    font-size: 96px;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+}
+
+.menu-button {
+    font-size: 54px;
+    height: 27%;
+    width: 100%;
+}
+
+.primary-button {
+    background-color: rgba(0, 0, 0, 255);
+    color: rgba(255, 255, 255, 255);
+}
+
+.secondary-button {
+    background-color: rgba(158, 158, 158, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    color: rgba(255, 255, 255, 255);
+}
+
+.basic-menu {
+    width: 30%;
+    height: 60%;
+    justify-content: space-between;
+}
+
+.button-group {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
