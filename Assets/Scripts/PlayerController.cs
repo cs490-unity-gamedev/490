@@ -6,89 +6,71 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    // META/STATE DATA
     public static event System.Action onPlayerDamaged;
     // public static event System.Action onPlayerDeath;
-
     public float maxHealth = 10;
     public float currHealth;
-    public float moveSpeed = 1f;
-    public float lookSpeed = 1f;
-    public GameObject bulletPrefab;
-    public Transform bulletTransform;
+
+    // DEBUG/TESTING PARAMETERS
+    public bool damageEnabled = true;
+    public bool firingEnabled = true;
+
+    // PARAMETERS AND CACHED VARIABLES
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float fireSpeed = 0.3f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletTransform;
 
     private Rigidbody2D rb;
     private Camera mainCam;
-    private Vector2 moveInput;
-    private Vector2 lookInput;
-    private bool fireInput;
+
+    // FIRING LOGIC
     private bool firing = false;
     private bool canFire = true;
-    public float fireSpeed = 0.3f;
-    private float fireTimer = 0f;
+    private float firingTimer = 0f;
 
-    // Start is called before the first frame update
-    void Start()
+    // INPUT VALUE READING
+    private Vector2 moveInput;
+    void OnMove(InputValue value) => moveInput = value.Get<Vector2>();
+    private Vector2 lookInput;
+    void OnLook(InputValue value) => lookInput = value.Get<Vector2>();
+    private bool fireInput;
+    void OnFire(InputValue value) => firing = !firing;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        mainCam = Camera.main;
         currHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (firing) {
-            shoot();
-        }
-        // has to be separate from firing, so that the timer can increase when out of combat to allow player to click multiple times to fire
-        if (!canFire) {
-            fireTimer += Time.deltaTime;
-            if (fireTimer >= fireSpeed) {
-                canFire = true;
-                fireTimer = 0;
+        if (firingEnabled) {
+            if (firing) {
+                shoot();
             }
+            tickFiringTimer(); // so fireSpeed can be enforced when player is not shooting
         }
-    }
-
-    void FixedUpdate() {
-        // use for movement
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         trackMouse();
     }
 
-    public void takeDamage(int damage) {
-        currHealth -= damage;
-        onPlayerDamaged?.Invoke();
-        print("health: " + currHealth);
-        
-        if (currHealth <= 0) {
-            Die();
-        }
-    }
-
-    private void Die() {
-        // could instantiate an explosion animation here later
-        Destroy(gameObject);
-        // load game over screen
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    void OnMove(InputValue value) {
-        moveInput = value.Get<Vector2>();
-    }
-
-    void OnLook(InputValue value) {
-        lookInput = value.Get<Vector2>();
-    }
-
-    void OnFire(InputValue value) {
-        firing = !firing;
-    }
-
-    void shoot() {
+    private void shoot() {
         if (canFire) {
             canFire = false;
             GameObject bullet = Instantiate(bulletPrefab, bulletTransform.position, bulletTransform.rotation);
+        }
+    }
+
+    private void tickFiringTimer() {
+        if (!canFire) {
+            firingTimer += Time.deltaTime;
+            if (firingTimer >= fireSpeed) {
+                canFire = true;
+                firingTimer = 0;
+            }
         }
     }
 
@@ -99,5 +81,33 @@ public class PlayerController : MonoBehaviour
         float rotZVal = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0, 0, rotZVal);
+    }
+
+    void FixedUpdate() // used for movement/interactions with physics engine
+    {
+        move();
+    }
+
+    private void move() {
+        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public void takeDamage(int damage) {
+        if (damageEnabled) {
+            currHealth -= damage;
+            onPlayerDamaged?.Invoke();
+            print("health: " + currHealth);
+            
+            if (currHealth <= 0) {
+                Die();
+            }
+        }
+    }
+
+    private void Die() {
+        // could instantiate an explosion animation here later
+        Destroy(gameObject);
+        // load game over screen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
