@@ -53,17 +53,17 @@ public class PauseGameLogic : MonoBehaviour
     public void restartGame() {
         Time.timeScale = 1f;
         isPaused = false;
-        // gameStateLogic.startGame(); // TODO: is it okay to just reload the scene to restart?
+        gameStateLogic.startGame(); // TODO: is it okay to just reload the scene to restart?
     }
 
     public void goToStartMenu() {
         Time.timeScale = 1f;
         isPaused = false;
-        // gameStateLogic.loadStartMenu();
+        gameStateLogic.loadStartMenu();
     }
 
     public void quitGame() {
-        // gameStateLogic.quitGame();
+        gameStateLogic.quitGame();
     }
 
     private void setGameStateIcon(bool paused) {

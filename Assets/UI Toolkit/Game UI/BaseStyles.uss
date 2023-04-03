@@ -36,3 +36,8 @@
     align-items: center;
     width: 100%;
 }
+
+.menu-background {
+    align-items: center;
+    justify-content: center;
+}
