@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     // META/STATE DATA
     public static event System.Action onPlayerDamaged;
@@ -45,9 +46,19 @@ public class PlayerController : MonoBehaviour
         currHealth = maxHealth;
     }
 
+    void Start()
+    {
+        if (!isLocalPlayer) {
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer) { // if we are not the main client, do not run this method.
+            return;
+        }
         if (firingEnabled) {
             if (firing) {
                 shoot();
@@ -85,6 +96,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() // used for movement/interactions with physics engine
     {
+        if (!isLocalPlayer) { // if we are not the main client, do not run this method.
+            return;
+        }
         move();
     }
 

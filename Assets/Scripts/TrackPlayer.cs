@@ -8,16 +8,14 @@ public class TrackPlayer : MonoBehaviour
     public float cameraSmoothSpeed = 0.125f;
     private Vector3 locationOffset = new Vector3(0, 0, -10); // default camera position
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        player = gameObject.transform.parent.transform;
+        gameObject.transform.SetParent(null, true);
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     void FixedUpdate()
