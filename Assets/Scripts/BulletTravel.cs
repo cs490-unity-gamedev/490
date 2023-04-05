@@ -19,9 +19,11 @@ public class BulletTravel : MonoBehaviour
     }
 
     // when bullet hits enemy, deal 1 damage to enemy (health -= 1) and destroy bullet
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             collision.gameObject.GetComponent<EnemyController>().takeDamage(1);
+            Destroy(gameObject);
+        } else if (collision.gameObject.tag == "Wall") {
             Destroy(gameObject);
         }
     }

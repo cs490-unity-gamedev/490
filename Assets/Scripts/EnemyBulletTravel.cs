@@ -19,9 +19,11 @@ public class EnemyBulletTravel : MonoBehaviour
     }
 
     // when bullet hits player, damage player (1) and destroy bullet
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
             collision.gameObject.GetComponent<PlayerController>().takeDamage(1);
+            Destroy(gameObject);
+        } else if (collision.gameObject.tag == "Wall") {
             Destroy(gameObject);
         }
     }
