@@ -2,9 +2,9 @@
     <Style src="project://database/Assets/UI%20Toolkit/Game%20UI/BaseStyles.uss?fileID=7433441132597879392&amp;guid=1e3f4614ef0b14d7ca08fad145769c4b&amp;type=3#BaseStyles" />
     <ui:VisualElement name="Background" style="flex-grow: 1; flex-direction: row; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px; justify-content: space-between;">
         <ui:VisualElement name="LeftQuarterContainer" style="width: 25%; height: 100%; justify-content: space-between;">
-            <ui:VisualElement name="ScoreHealthGroup" style="width: 100%; height: 14%; justify-content: space-between;">
+            <ui:VisualElement name="ScoreHealthGroup" style="width: 100%; height: 13%; justify-content: space-between;">
                 <ui:Label text="Score: " display-tooltip-when-elided="true" name="ScoreText" style="font-size: 40px; color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/monogram.ttf?fileID=12800000&amp;guid=26749bb4f20064a02b9815e339091083&amp;type=3#monogram&apos;);" />
-                <ui:VisualElement name="HeartBar" style="flex-direction: row; width: 100%; height: 47%; justify-content: flex-start; flex-wrap: wrap;" />
+                <ui:VisualElement name="HeartBar" style="flex-direction: row; width: 100%; height: 60%; justify-content: flex-start; flex-wrap: wrap;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="MiddleContainer" class="menu-background" style="width: 50%;">
@@ -22,10 +22,10 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightQuarterContainer" style="width: 25%; height: 100%; align-items: flex-end;">
-            <ui:VisualElement name="PauseGroup" style="height: 5%; width: 30%; flex-direction: row; justify-content: space-between; align-items: center;">
-                <ui:VisualElement name="GameStatusIcon" style="width: 32%; height: 100%; background-image: url(&apos;project://database/Assets/Sprites/Game%20State/pause-white.png?fileID=2800000&amp;guid=3559cb916cd6744e3aca9173e45828b5&amp;type=3#pause-white&apos;);" />
+            <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" name="PauseGroup" style="width: 30%; height: 5%; flex-direction: row; justify-content: space-between; background-color: rgba(88, 88, 88, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; align-items: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                <ui:VisualElement name="PauseStatusIcon" style="width: 32%; height: 100%; background-image: url(&apos;project://database/Assets/Sprites/Game%20State/pause-white.png?fileID=2800000&amp;guid=3559cb916cd6744e3aca9173e45828b5&amp;type=3#pause-white&apos;);" />
                 <ui:Label text="ESC" display-tooltip-when-elided="true" name="EscText" style="font-size: 32px; color: rgb(255, 255, 255);" />
-            </ui:VisualElement>
+            </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

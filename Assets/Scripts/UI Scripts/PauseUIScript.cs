@@ -8,20 +8,20 @@ public class PauseUIScript : MonoBehaviour
     [SerializeField] private Sprite pause, play;
 
     // TODO: code seems repetitive
-    public void togglePauseMenuAndIconDisplay(bool isPaused, VisualElement pauseMenu, VisualElement gameStatusIcon) {
+    public void togglePauseMenuAndIconDisplay(bool isPaused, VisualElement pauseMenu, VisualElement pauseStatusIcon) {
         if (isPaused) {
-            pauseMenu.style.display = DisplayStyle.None;
-        } else {
             pauseMenu.style.display = DisplayStyle.Flex;
+        } else {
+            pauseMenu.style.display = DisplayStyle.None;
         }
-        setGameStateIcon(isPaused, gameStatusIcon);
+        setGameStateIcon(isPaused, pauseStatusIcon);
     }
 
-    private void setGameStateIcon(bool isPaused, VisualElement gameStatusIcon) {
+    private void setGameStateIcon(bool isPaused, VisualElement pauseStatusIcon) {
         if (isPaused) {
-            gameStatusIcon.style.backgroundImage = new StyleBackground(pause);
+            pauseStatusIcon.style.backgroundImage = new StyleBackground(play);
         } else {
-            gameStatusIcon.style.backgroundImage = new StyleBackground(play);
+            pauseStatusIcon.style.backgroundImage = new StyleBackground(pause);
         }
     }
 }

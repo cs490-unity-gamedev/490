@@ -45,7 +45,7 @@
 .health-heart {
     height: 100%;
     width: 16%;
-    background-image: url('project://database/Assets/Sprites/hearts/full-heart.png?fileID=2800000&guid=b126709c41d984fbc9d8e265c2513c15&type=3#full-heart');
+    background-image: url('project://database/Assets/Sprites/hearts/full-heart-pixel.png?fileID=2800000&guid=b2f369ba4692b4e25b684c823533d372&type=3#full-heart-pixel');
     margin-left: 2px;
     margin-right: 2px;
     margin-top: 2px;
