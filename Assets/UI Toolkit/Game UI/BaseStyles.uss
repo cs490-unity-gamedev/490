@@ -12,17 +12,17 @@
 }
 
 .primary-button {
-    background-color: rgba(0, 0, 0, 255);
-    color: rgba(255, 255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .secondary-button {
-    background-color: rgba(158, 158, 158, 255);
+    background-color: rgb(158, 158, 158);
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .basic-menu {
@@ -40,4 +40,20 @@
 .menu-background {
     align-items: center;
     justify-content: center;
+}
+
+.health-heart {
+    height: 100%;
+    width: 16%;
+    background-image: url('project://database/Assets/Sprites/hearts/full-heart.png?fileID=2800000&guid=b126709c41d984fbc9d8e265c2513c15&type=3#full-heart');
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.pause-menu-button {
+    width: 100%;
+    height: 20%;
+    font-size: 40px;
 }
