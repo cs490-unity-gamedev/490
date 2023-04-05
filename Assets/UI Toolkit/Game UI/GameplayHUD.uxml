@@ -10,7 +10,7 @@
         <ui:VisualElement name="MiddleContainer" class="menu-background" style="width: 50%;">
             <ui:VisualElement name="PauseMenu" style="width: 75%; height: 75%; background-color: rgba(217, 217, 217, 0.85); padding-left: 68px; padding-right: 68px; padding-top: 60px; padding-bottom: 50px; align-items: center; justify-content: space-between;">
                 <ui:VisualElement name="PauseGroup" style="height: 20%; width: 30%; align-items: center; justify-content: space-between;">
-                    <ui:VisualElement name="PausedIcon" style="width: 30%; height: 42%; background-image: url(&apos;project://database/Assets/Sprites/pause.png?fileID=2800000&amp;guid=f5b0ab0e9252443a0acd2c396db8a2b2&amp;type=3#pause&apos;);" />
+                    <ui:VisualElement name="PausedIcon" style="width: 30%; height: 45%; background-image: url(&apos;project://database/Assets/Sprites/Game%20State/pause.png?fileID=2800000&amp;guid=f5b0ab0e9252443a0acd2c396db8a2b2&amp;type=3#pause&apos;);" />
                     <ui:Label text="PAUSED" display-tooltip-when-elided="true" name="Paused" style="font-size: 40px; color: rgb(0, 0, 0); -unity-text-align: upper-center;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="ButtonGroup" class="button-group" style="height: 70%;">
@@ -22,8 +22,8 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightQuarterContainer" style="width: 25%; height: 100%; align-items: flex-end;">
-            <ui:VisualElement name="PauseGroup" style="height: 5%; width: 26%; flex-direction: row; justify-content: space-between; align-items: center;">
-                <ui:VisualElement name="PauseIcon" style="width: 32%; height: 100%; background-image: url(&apos;project://database/Assets/Sprites/pause-white.png?fileID=2800000&amp;guid=3559cb916cd6744e3aca9173e45828b5&amp;type=3#pause-white&apos;);" />
+            <ui:VisualElement name="PauseGroup" style="height: 5%; width: 30%; flex-direction: row; justify-content: space-between; align-items: center;">
+                <ui:VisualElement name="GameStatusIcon" style="width: 32%; height: 100%; background-image: url(&apos;project://database/Assets/Sprites/Game%20State/pause-white.png?fileID=2800000&amp;guid=3559cb916cd6744e3aca9173e45828b5&amp;type=3#pause-white&apos;);" />
                 <ui:Label text="ESC" display-tooltip-when-elided="true" name="EscText" style="font-size: 32px; color: rgb(255, 255, 255);" />
             </ui:VisualElement>
         </ui:VisualElement>
