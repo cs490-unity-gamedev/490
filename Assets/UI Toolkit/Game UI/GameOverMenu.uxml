@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Game%20UI/BaseStyles.uss?fileID=7433441132597879392&amp;guid=1e3f4614ef0b14d7ca08fad145769c4b&amp;type=3#BaseStyles" />
-    <ui:VisualElement name="Background" class="menu-background" style="flex-grow: 1; background-color: rgb(255, 255, 255);">
+    <ui:VisualElement name="Background" class="menu-background" style="background-color: rgba(31, 36, 51, 255);">
         <ui:VisualElement name="GameOverMenu" class="basic-menu">
-            <ui:Label text="Game Over" display-tooltip-when-elided="true" class="header" style="color: rgba(178, 0, 0, 255);" />
+            <ui:Label text="Game Over" display-tooltip-when-elided="true" class="header" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; -unity-font-style: normal;" />
             <ui:VisualElement name="ButtonGroup" class="button-group" style="height: 60%;">
                 <ui:Button text="Try Again" display-tooltip-when-elided="true" name="Play" class="menu-button primary-button" />
-                <ui:Button text="Start Menu" display-tooltip-when-elided="true" name="StartMenu" class="menu-button secondary-button" />
+                <ui:Button text="Start Menu" display-tooltip-when-elided="true" name="StartMenu" class="menu-button secondary2-button" />
                 <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="menu-button secondary-button" />
             </ui:VisualElement>
         </ui:VisualElement>

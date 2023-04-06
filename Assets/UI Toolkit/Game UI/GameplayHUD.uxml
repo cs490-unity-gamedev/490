@@ -18,7 +18,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="ButtonGroup" class="button-group" style="height: 70%;">
                     <ui:Button text="Resume" display-tooltip-when-elided="true" name="Resume" class="pause-menu-button primary-button" />
-                    <ui:Button text="Restart" display-tooltip-when-elided="true" name="Restart" class="pause-menu-button" style="background-color: rgb(114, 113, 113); color: rgb(255, 255, 255);" />
+                    <ui:Button text="Restart" display-tooltip-when-elided="true" name="Restart" class="pause-menu-button secondary2-button" />
                     <ui:Button text="Start Menu" display-tooltip-when-elided="true" name="StartMenu" class="pause-menu-button secondary-button" />
                     <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="pause-menu-button secondary-button" />
                 </ui:VisualElement>
