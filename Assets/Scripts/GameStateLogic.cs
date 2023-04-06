@@ -9,7 +9,18 @@ public class GameStateLogic : MonoBehaviour
     // to keep track of when the game is/isn't paused so UI can change accordingly
     // TODO: is there a better way? currently, have to invoke action each time isPaused changes
     public static event System.Action onPauseStatusChange;
+    public static event System.Action onScoreChange;
     public bool isPaused = false;
+    public int playerScore = 0;
+    private const int enemyDefaultValue = 100;
+
+    private void OnEnable() {
+        EnemyController.onEnemyDeath += () => addScore(enemyDefaultValue);
+    }
+
+    private void OnDisable() {
+        EnemyController.onEnemyDeath -= () => addScore(enemyDefaultValue);
+    }
 
     // Update is called once per frame
     void Update()
@@ -64,5 +75,10 @@ public class GameStateLogic : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         onPauseStatusChange?.Invoke();
+    }
+
+    private void addScore(int scoreToAdd) {
+        playerScore += scoreToAdd;
+        onScoreChange?.Invoke();
     }
 }

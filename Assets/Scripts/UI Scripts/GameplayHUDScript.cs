@@ -12,15 +12,18 @@ public class GameplayHUDScript : MonoBehaviour
     private VisualElement root;
     private VisualElement pauseMenu;
     private VisualElement pauseStatusIcon;
+    private Label playerScoreNum;
 
     private const string pauseMenuName = "PauseMenu";
     private const string pauseStatusIconName = "PauseStatusIcon";
+    private const string playerScoreNumName = "ScoreNum";
 
     // every time player health changes, fire event
     // TODO: can this somehow be moved to HealthUIScript?
     private void OnEnable() {
         PlayerController.onPlayerDamaged += () => healthUIScript.drawHearts(root, playerController);
         GameStateLogic.onPauseStatusChange += () => pauseUIScript.togglePauseMenuAndIconDisplay(gameStateLogic.isPaused, pauseMenu, pauseStatusIcon);
+        GameStateLogic.onScoreChange += () => updateDisplayedScore();
 
         // Buttons
         root.Q<Button>("Resume").clicked += () => gameStateLogic.resumeGame();
@@ -33,6 +36,7 @@ public class GameplayHUDScript : MonoBehaviour
     private void OnDisable() {
         PlayerController.onPlayerDamaged -= () => healthUIScript.drawHearts(root, playerController);
         GameStateLogic.onPauseStatusChange -= () => pauseUIScript.togglePauseMenuAndIconDisplay(gameStateLogic.isPaused, pauseMenu, pauseStatusIcon);
+        GameStateLogic.onScoreChange -= () => updateDisplayedScore();
 
         // Buttons
         root.Q<Button>("Resume").clicked -= () => gameStateLogic.resumeGame();
@@ -46,11 +50,15 @@ public class GameplayHUDScript : MonoBehaviour
         root = GetComponent<UIDocument>().rootVisualElement;
         pauseMenu = root.Q(pauseMenuName);
         pauseStatusIcon = root.Q(pauseStatusIconName);
-        
+        playerScoreNum = root.Q<Label>(playerScoreNumName);
 
         pauseMenu.style.display = DisplayStyle.None;
         healthUIScript.drawHearts(root, playerController);
         // initializeButtonLogic();
+    }
+
+    private void updateDisplayedScore() {
+        playerScoreNum.text = gameStateLogic.playerScore.ToString();
     }
     
     // Update is called once per frame

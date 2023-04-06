@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public static event System.Action onEnemyDeath;
     [SerializeField]
     private int health = 3;
     [SerializeField]
@@ -18,7 +19,6 @@ public class EnemyController : MonoBehaviour
     private Vector2 movement;
     [SerializeField]
     private float moveSpeed = 1f;
-    private Logic logic;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +26,6 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         // use rb to manipulate mvm and rotation of object
         rb = this.GetComponent<Rigidbody2D>();
-
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
 
         // start shooting coroutine
         leftBulletTransform = gameObject.transform.GetChild(0).transform;
@@ -65,8 +63,9 @@ public class EnemyController : MonoBehaviour
     private void Die() {
         // could instantiate an explosion animation here later
         Destroy(gameObject);
-        // increase player score
-        logic.addScore(1);
+        // invoke to increase player score
+        onEnemyDeath?.Invoke();
+        // logic.addScore(1);
     }
 
     private void moveCharacter(Vector2 direction) {
