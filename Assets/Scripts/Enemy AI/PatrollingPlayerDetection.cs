@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObstacleDetection : MonoBehaviour
+public class PatrollingPlayerDetection : MonoBehaviour
 {
-    private EnemyController enemyController;
+    private EnemyAI enemyAI;
     private List<Collider2D> obstacles;
+    public bool obstacleDetectedWhilePatrolling = false;
 
     void Start() {
-        enemyController = GetComponentInParent<EnemyController>();
         obstacles = new List<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy") {
             obstacles.Add(col);
-            enemyController.obstacleDetected = true;
-            print("wall detected");
+            obstacleDetectedWhilePatrolling = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        print("wall removed");
-        obstacles.Remove(col);
+        if (col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy") {
+            obstacles.Remove(col);
+        }
         if (obstacles.Count == 0) {
-            enemyController.obstacleDetected = false;
+            obstacleDetectedWhilePatrolling = false;
         }
     }
 }

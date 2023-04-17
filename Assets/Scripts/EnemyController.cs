@@ -5,31 +5,31 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public static event System.Action onEnemyDeath;
-    [SerializeField]
-    private int health = 3;
-    [SerializeField]
-    private float fireSpeed;
-    [SerializeField]
-    private GameObject bulletPrefab;
+    [SerializeField] private int health = 3;
+    [SerializeField] private float fireSpeed = 0.5f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private EnemyAIData enemyAIData;
     private Transform leftBulletTransform;
     private Transform rightBulletTransform;
     private Transform playerDetectionCollider;
     private Transform obstacleDetectionCollider;
+    PatrollingPlayerDetection patrollingPlayerDetection;
 
-    private GameObject player;
     private Rigidbody2D rb; // reference for this object's Rigidbody2D
     private Vector2 movement;
-    [SerializeField]
-    private float moveSpeed = 1f;
+    [SerializeField] private float patrolSpeed = 2f;
+    [SerializeField] private float chaseSpeed = 4f;
     public bool obstacleDetected = false;
-    public Transform playerPosition = null;
+    public Transform targetPlayer = null;
     private float patrolTimer = 0f;
     private float patrolTimeLimit = 5f;
+
+    private bool canFire = true;
+    private float firingTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         // use rb to manipulate mvm and rotation of object
         rb = this.GetComponent<Rigidbody2D>();
         
@@ -39,47 +39,8 @@ public class EnemyController : MonoBehaviour
         // start shooting coroutine
         leftBulletTransform = gameObject.transform.GetChild(2).transform;
         rightBulletTransform = gameObject.transform.GetChild(3).transform;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (playerPosition != null) {
-            // ==== DETECTED PLAYER BEHAVIOR ====
-            StartCoroutine(shoot(fireSpeed));
-            // calculate the direction our player is compared to our enemy obj
-            Vector3 direction = player.transform.position - transform.position;
-            // calculate the angle btwn enemy obj and player obj
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            // set RigidBody's rotation
-            rb.rotation = angle;
-            direction.Normalize(); // bc we want movement val to be btwn -1 and 1
-            movement = direction;
-        } else {
-            // ==== PATROL BEHAVIOR ====
-
-            // transform.position += transform.right * moveSpeed * Time.deltaTime;
-
-            if (obstacleDetected) {
-                // turn around
-                // obstacleDetected = false;
-                Vector3 newDir = Direction.randomDir();
-                transform.eulerAngles = newDir;
-            } else {
-                transform.position += transform.right * moveSpeed * Time.deltaTime;
-            }
-        }
-    }
-
-    private void tickPatrolTimer() {
-        patrolTimer += Time.deltaTime;
-        if (patrolTimer >= patrolTimeLimit) {
-            patrolTimer = 0;
-        }
-    }
-
-    private void FixedUpdate() {
-        moveCharacter(movement);
+        patrollingPlayerDetection = GetComponentInChildren<PatrollingPlayerDetection>();
     }
 
     public void takeDamage(int damage) {
@@ -98,17 +59,37 @@ public class EnemyController : MonoBehaviour
         // logic.addScore(1);
     }
 
-    private void moveCharacter(Vector2 direction) {
-        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+    public void chasePlayer(Vector2 direction) {
+        // calculate the angle btwn enemy obj and player obj
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // set RigidBody's rotation
+        rb.rotation = angle;
+
+        rb.MovePosition((Vector2)transform.position + (direction * chaseSpeed * Time.deltaTime));
     }
 
-    private IEnumerator shoot(float interval) {
-        yield return new WaitForSeconds(interval);
+    public void patrol() {
+        if (patrollingPlayerDetection.obstacleDetectedWhilePatrolling) {
+            // turn around
+            Vector3 newDir = RotationAngles.randomDir();
+            transform.eulerAngles = newDir;
+        } else {
+            transform.position += transform.right * patrolSpeed * Time.deltaTime;
+        }
+    }
 
-        Instantiate(bulletPrefab, leftBulletTransform.position, leftBulletTransform.rotation);
-        Instantiate(bulletPrefab, rightBulletTransform.position, rightBulletTransform.rotation);
-
-        StartCoroutine(shoot(interval));
+    public void shoot() {
+        if (canFire) {
+            canFire = false;
+            Instantiate(bulletPrefab, leftBulletTransform.position, leftBulletTransform.rotation);
+            Instantiate(bulletPrefab, rightBulletTransform.position, rightBulletTransform.rotation);
+        } else {
+            firingTimer += Time.deltaTime;
+            if (firingTimer >= fireSpeed) {
+                canFire = true;
+                firingTimer = 0;
+            }
+        }
     }
 
     public static class Direction {
