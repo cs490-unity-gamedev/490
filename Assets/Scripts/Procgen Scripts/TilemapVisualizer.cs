@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class TilemapVisualizer : MonoBehaviour
 {
-    [SerializeField] private Tilemap floorTilemap, wallTilemap;
+    [SerializeField] public Tilemap floorTilemap, wallTilemap;
     [SerializeField] private TileBase floorTile, wallTop; // could be made into an array and select randomly
 
     public void paintFloorTiles(IEnumerable<Vector2Int> floorPositions) {

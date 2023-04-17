@@ -10,7 +10,9 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
     public void generateDungeon() {
         tilemapVisualizer.clearTiles();
         runProceduralGeneration();
+        instantiateEnemies();
     }
 
     protected abstract void runProceduralGeneration();
+    protected abstract void instantiateEnemies();
 }

@@ -11,7 +11,6 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 
     protected override void runProceduralGeneration() {
         HashSet<Vector2Int> floorPositions = runRandomWalk(startPos, randomWalkParameters);
-        tilemapVisualizer.clearTiles();
         tilemapVisualizer.paintFloorTiles(floorPositions);
         WallGenerator.createWalls(floorPositions, tilemapVisualizer);
     }
@@ -29,5 +28,9 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
         }
         
         return floorPositions;
+    }
+
+    protected override void instantiateEnemies() {
+        throw new NotImplementedException();
     }
 }

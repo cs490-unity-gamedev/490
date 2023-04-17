@@ -7,9 +7,36 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
     [SerializeField] private int corridorLength = 14, corridorCount = 5;
     [SerializeField] [Range(0.1f, 1f)] private float roomPercent = 0.8f; // exact minimum of 2 rooms to avoid dead ends
+    private HashSet<HashSet<Vector2Int>> rooms = new HashSet<HashSet<Vector2Int>>();
+    [SerializeField] private int enemiesPerRoom = 3;
+    [SerializeField] private GameObject enemyPrefab;
 
     protected override void runProceduralGeneration() {
         corridorFirstGenerate();
+        instantiateEnemies();
+    }
+
+    protected override void instantiateEnemies() {
+        print(transform.childCount);
+        for (int i = 0; i < transform.childCount; i++) {
+            Transform child = transform.GetChild(0);
+            for (int j = 0; j < child.childCount; j++) {
+                DestroyImmediate(child.GetChild(0).gameObject);
+            }
+            DestroyImmediate(child.gameObject); // assume all children are enemy parent objects. clear all enemies.
+        }
+        GameObject newEnemiesChild = new GameObject("Enemies");
+        newEnemiesChild.transform.parent = transform;
+
+        foreach (HashSet<Vector2Int> room in rooms) {
+            List<Vector2Int> roomPositions = room.ToList();
+
+            for (int i = 0; i < enemiesPerRoom; i++) {
+                Vector2Int posInRoom = roomPositions[UnityEngine.Random.Range(0, roomPositions.Count)];
+                Vector3Int tilePos = tilemapVisualizer.floorTilemap.WorldToCell((Vector3Int) posInRoom);
+                Instantiate(enemyPrefab, tilePos, transform.rotation, newEnemiesChild.transform);
+            }
+        }
     }
 
     private void corridorFirstGenerate() {
@@ -55,8 +82,10 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             roomsToCreate = roomsToCreate.Union(randomNonDeadEndRoomPositions).ToList();
         }
 
+        rooms = new HashSet<HashSet<Vector2Int>>(); // reset rooms to empty object
         foreach (Vector2Int roomPos in roomsToCreate) {
             HashSet<Vector2Int> roomFloor = runRandomWalk(roomPos, randomWalkParameters);
+            rooms.Add(roomFloor);
             roomPositions.UnionWith(roomFloor);
         }
 
