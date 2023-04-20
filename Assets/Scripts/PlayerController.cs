@@ -44,10 +44,18 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        mainCam = Camera.main;
-        currHealth = maxHealth;
         view = GetComponent<PhotonView>();
+        if (view.IsMine) {
+            rb = GetComponent<Rigidbody2D>();
+            currHealth = maxHealth;
+        }
+    }
+
+    void Start()
+    {
+        if (view.IsMine) {
+            mainCam = transform.Find("Camera").GetComponent<Camera>();
+        }
     }
 
     // Update is called once per frame
