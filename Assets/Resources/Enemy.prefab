@@ -244,6 +244,8 @@ GameObject:
   - component: {fileID: 5043297541118435659}
   - component: {fileID: 632692773132405539}
   - component: {fileID: 7839183556919974955}
+  - component: {fileID: -3167168112129772056}
+  - component: {fileID: -2718380278275514585}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -360,7 +362,8 @@ MonoBehaviour:
   fireSpeed: 0.5
   bulletPrefab: {fileID: 4268803264299375687, guid: 6c349c074d934425dba3928021e5c214, type: 3}
   enemyAIData: {fileID: 0}
-  moveSpeed: 1
+  patrolSpeed: 2
+  chaseSpeed: 4
   obstacleDetected: 0
   targetPlayer: {fileID: 0}
 --- !u!114 &5043297541118435659
@@ -398,12 +401,7 @@ MonoBehaviour:
   - {fileID: 6047930723008948407}
   enemyAIData: {fileID: 5043297541118435659}
   detectionDelay: 0.05
-  aiUpdateDelay: 0.06
-  attackDistance: 0.5
-  bulletPrefab: {fileID: 0}
-  fireSpeed: 0
-  movementInput: {x: 0, y: 0}
-  movementDirectionSolver: {fileID: 0}
+  movementDirectionSolver: {fileID: 9037528895988395439}
   OnAttackPressed:
     m_PersistentCalls:
       m_Calls: []
@@ -429,6 +427,62 @@ CapsuleCollider2D:
   m_Offset: {x: -0, y: 0}
   m_Size: {x: 0.82, y: 1.48}
   m_Direction: 0
+--- !u!114 &-3167168112129772056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633519147042203767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -2718380278275514585}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-2718380278275514585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633519147042203767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &2655873400350861320
 GameObject:
   m_ObjectHideFlags: 0

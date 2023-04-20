@@ -45,7 +45,6 @@ public class EnemyAI : MonoBehaviour
         }
         else {
             enemyController.patrol();
-            print("patrol");
         }
     }
 

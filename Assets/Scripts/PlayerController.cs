@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,23 +39,29 @@ public class PlayerController : MonoBehaviour
     private bool fireInput;
     void OnFire(InputValue value) => firing = !firing;
 
+    // PHOTON
+    PhotonView view;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCam = Camera.main;
         currHealth = maxHealth;
+        view = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (firingEnabled) {
-            if (firing) {
-                shoot();
+        if (view.IsMine) {
+            if (firingEnabled) {
+                if (firing) {
+                    shoot();
+                }
+                tickFiringTimer(); // so fireSpeed can be enforced when player is not shooting
             }
-            tickFiringTimer(); // so fireSpeed can be enforced when player is not shooting
+            trackMouse();
         }
-        trackMouse();
     }
 
     private void shoot() {
@@ -85,7 +92,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() // used for movement/interactions with physics engine
     {
-        move();
+        if (view.IsMine) {
+            move();
+        }
     }
 
     private void move() {

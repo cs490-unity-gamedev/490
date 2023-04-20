@@ -8,7 +8,7 @@ public class PatrollingPlayerDetection : MonoBehaviour
     private List<Collider2D> obstacles;
     public bool obstacleDetectedWhilePatrolling = false;
 
-    void Start() {
+    void Awake() {
         obstacles = new List<Collider2D>();
     }
 

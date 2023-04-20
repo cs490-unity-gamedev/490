@@ -24,6 +24,10 @@ public class EnemyController : MonoBehaviour
     private bool canFire = true;
     private float firingTimer = 0f;
 
+    void Awake() {
+        patrollingPlayerDetection = GetComponentInChildren<PatrollingPlayerDetection>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,8 +40,6 @@ public class EnemyController : MonoBehaviour
         // start shooting coroutine
         leftBulletTransform = gameObject.transform.GetChild(2).transform;
         rightBulletTransform = gameObject.transform.GetChild(3).transform;
-
-        patrollingPlayerDetection = GetComponentInChildren<PatrollingPlayerDetection>();
     }
 
     public void takeDamage(int damage) {
