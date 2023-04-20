@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class EnemyController : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die() {
         // could instantiate an explosion animation here later
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
         // invoke to increase player score
         onEnemyDeath?.Invoke();
         // logic.addScore(1);
