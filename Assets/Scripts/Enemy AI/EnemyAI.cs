@@ -8,22 +8,17 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private List<SteeringBehavior> steeringBehaviors;
     [SerializeField] private List<Detector> detectors;
     [SerializeField] private EnemyAIData enemyAIData;
-    [SerializeField] private float detectionDelay = 0.05f, aiUpdateDelay = 0.06f;
-    [SerializeField] private float attackDistance = 0.5f;
+    [SerializeField] private float detectionDelay = 0.05f;
 
     PatrollingPlayerDetection patrollingPlayerDetection;
     [SerializeField] private ContextSolver movementDirectionSolver;
     private EnemyController enemyController;
     private Vector2 movement;
-    private bool canFire = true;
-    private float firingTimer = 0f;
     
 
     // inputs sent from the Enemy AI to the Enemy controller
     public UnityEvent OnAttackPressed;
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
-
-    bool following = false;
 
     private void Start() {
         enemyController = GetComponentInParent<EnemyController>();

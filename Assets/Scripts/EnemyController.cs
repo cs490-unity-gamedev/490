@@ -21,9 +21,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float chaseSpeed = 4f;
     public bool obstacleDetected = false;
     public Transform targetPlayer = null;
-    private float patrolTimer = 0f;
-    private float patrolTimeLimit = 5f;
-
     private bool canFire = true;
     private float firingTimer = 0f;
 
