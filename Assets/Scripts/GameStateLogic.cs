@@ -35,7 +35,7 @@ public class GameStateLogic : MonoBehaviour
         isPaused = false;
         onPauseStatusChange?.Invoke();
         // TODO: currently have hard-coded 1
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Loading");
     }
 
     public void quitGame() {
@@ -48,7 +48,7 @@ public class GameStateLogic : MonoBehaviour
         isPaused = false;
         onPauseStatusChange?.Invoke();
         // TODO: currently have hard-coded 0
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartMenu");
     }
 
     public void loadTutorial() {
