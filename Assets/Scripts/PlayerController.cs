@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+<<<<<<< Updated upstream
 using Mirror;
+=======
+using Photon.Pun;
+>>>>>>> Stashed changes
 
 public class PlayerController : NetworkBehaviour
 {
@@ -39,6 +43,9 @@ public class PlayerController : NetworkBehaviour
     private bool fireInput;
     void OnFire(InputValue value) => firing = !firing;
 
+    // MULTIPLAYER
+    private PhotonView view;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,24 +55,36 @@ public class PlayerController : NetworkBehaviour
 
     void Start()
     {
+<<<<<<< Updated upstream
         if (!isLocalPlayer) {
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
+=======
+        view = GetComponent<PhotonView>();
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         if (!isLocalPlayer) { // if we are not the main client, do not run this method.
             return;
         }
         if (firingEnabled) {
             if (firing) {
                 shoot();
+=======
+        if (view.IsMine) {
+            if (firingEnabled) {
+                if (firing) {
+                    shoot();
+                }
+                tickFiringTimer(); // so fireSpeed can be enforced when player is not shooting
+>>>>>>> Stashed changes
             }
-            tickFiringTimer(); // so fireSpeed can be enforced when player is not shooting
+            trackMouse();
         }
-        trackMouse();
     }
 
     private void shoot() {
@@ -96,10 +115,16 @@ public class PlayerController : NetworkBehaviour
 
     void FixedUpdate() // used for movement/interactions with physics engine
     {
+<<<<<<< Updated upstream
         if (!isLocalPlayer) { // if we are not the main client, do not run this method.
             return;
         }
         move();
+=======
+        if (view.IsMine) {
+            move();
+        }
+>>>>>>> Stashed changes
     }
 
     private void move() {

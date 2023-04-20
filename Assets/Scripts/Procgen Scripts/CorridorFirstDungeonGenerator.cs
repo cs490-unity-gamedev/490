@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
@@ -9,16 +11,67 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     [SerializeField] [Range(0.1f, 1f)] private float roomPercent = 0.8f; // exact minimum of 2 rooms to avoid dead ends
 
     protected override void runProceduralGeneration() {
+        tilemapVisualizer.clearTiles();
         corridorFirstGenerate();
+<<<<<<< Updated upstream
+=======
+        instantiateEnemies();
+    }
+
+    protected override void instantiateEnemies() {
+        for (int i = 0; i < transform.childCount; i++) {
+            Transform child = transform.GetChild(0);
+            for (int j = 0; j < child.childCount; j++) {
+                DestroyImmediate(child.GetChild(0).gameObject);
+            }
+            DestroyImmediate(child.gameObject); // assume all children are enemy parent objects. clear all enemies.
+        }
+        GameObject newEnemiesChild = new GameObject("Enemies");
+        newEnemiesChild.transform.parent = transform;
+
+        foreach (HashSet<Vector2Int> room in rooms) {
+            List<Vector2Int> roomPositions = room.ToList();
+
+            for (int i = 0; i < enemiesPerRoom; i++) {
+                Vector2Int posInRoom = roomPositions[UnityEngine.Random.Range(0, roomPositions.Count)];
+                Vector3Int tilePos = tilemapVisualizer.floorTilemap.WorldToCell((Vector3Int) posInRoom);
+                PhotonNetwork.Instantiate(enemyPrefab.name, tilePos, transform.rotation);
+            }
+        }
+>>>>>>> Stashed changes
     }
 
     private void corridorFirstGenerate() {
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-        List<Vector2Int> potentialRoomPositions = new List<Vector2Int>();
+        if (PhotonNetwork.IsMasterClient) {
+            List<Vector2Int> potentialRoomPositions = new List<Vector2Int>();
 
-        createCorridors(floorPositions, potentialRoomPositions);
-        HashSet<Vector2Int> roomPositions = createRooms(potentialRoomPositions);
-        floorPositions.UnionWith(roomPositions);
+            createCorridors(floorPositions, potentialRoomPositions);
+            HashSet<Vector2Int> roomPositions = createRooms(potentialRoomPositions);
+            floorPositions.UnionWith(roomPositions);
+
+            // PHOTON conversion below
+            int[] photonXTiles = new int[floorPositions.Count];
+            int[] photonYTiles = new int[floorPositions.Count];
+            int numTile = 0;
+            foreach (Vector2Int tile in floorPositions) {
+                photonXTiles[numTile] = tile.x;
+                photonYTiles[numTile] = tile.y;
+                numTile++;
+            }
+
+            Hashtable photonHash = new Hashtable();
+            photonHash.Add("TilesX", photonXTiles);
+            photonHash.Add("TilesY", photonYTiles);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(photonHash);
+        } else {
+            int[] photonXTiles = (int[]) PhotonNetwork.CurrentRoom.CustomProperties["TilesX"];
+            int[] photonYTiles = (int[]) PhotonNetwork.CurrentRoom.CustomProperties["TilesY"];
+            for (int numTile = 0; numTile < photonXTiles.Length; numTile++) {
+                Vector2Int tile = new Vector2Int(photonXTiles[numTile], photonYTiles[numTile]);
+                floorPositions.Add(tile);
+            }
+        }
 
         tilemapVisualizer.paintFloorTiles(floorPositions);
         WallGenerator.createWalls(floorPositions, tilemapVisualizer);
