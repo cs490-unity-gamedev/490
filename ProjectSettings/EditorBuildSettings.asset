@@ -9,7 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 92dff560bee6b4732a5437a690aa9350
   - enabled: 1
-    path: Assets/Scenes/GameplayScene.unity
+    path: Assets/Scenes/Loading.unity
+    guid: 7efaa1e35168242de8307ff6071efb83
+  - enabled: 1
+    path: Assets/Scenes/Gameplay.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/GameOver.unity

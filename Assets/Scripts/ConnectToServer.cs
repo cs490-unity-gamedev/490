@@ -18,11 +18,11 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.JoinOrCreateRoom("Lobby", null, null);
+        PhotonNetwork.JoinOrCreateRoom("MainRoom", null, null);
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("GameplayScene");
+        PhotonNetwork.LoadLevel("Gameplay");
     }
 }
