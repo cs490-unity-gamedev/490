@@ -24,7 +24,6 @@ public class SeekBehavior : SteeringBehavior
             } else {
                 reachedLastTargetPlayer = false;
                 enemyAIData.currentTargetPlayer = enemyAIData.targets.OrderBy(target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
-                print(enemyAIData.currentTargetPlayer);
             }
         }
 
