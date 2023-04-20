@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     private void shoot() {
         if (canFire) {
             canFire = false;
-            GameObject bullet = Instantiate(bulletPrefab, bulletTransform.position, bulletTransform.rotation);
+            GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, bulletTransform.position, bulletTransform.rotation);
         }
     }
 

@@ -22,9 +22,7 @@ public class BulletTravel : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             collision.gameObject.GetComponent<EnemyController>().takeDamage(1);
-            Destroy(gameObject);
-        } else if (collision.gameObject.tag == "Wall") {
-            Destroy(gameObject);
-        }
+        } 
+        Destroy(gameObject);
     }
 }
