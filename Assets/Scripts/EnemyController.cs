@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     private Transform rightBulletTransform;
     private Transform playerDetectionCollider;
     private Transform obstacleDetectionCollider;
-    PatrollingPlayerDetection patrollingPlayerDetection;
+    PatrollingObstacleDetection patrollingObstacleDetection;
 
     private Rigidbody2D rb; // reference for this object's Rigidbody2D
     private Vector2 movement;
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     private float firingTimer = 0f;
 
     void Awake() {
-        patrollingPlayerDetection = GetComponentInChildren<PatrollingPlayerDetection>();
+        patrollingObstacleDetection = GetComponentInChildren<PatrollingObstacleDetection>();
     }
 
     // Start is called before the first frame update
@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
     }
 
     public void patrol() {
-        if (patrollingPlayerDetection.obstacleDetectedWhilePatrolling) {
+        if (patrollingObstacleDetection.obstacleDetectedWhilePatrolling) {
             // turn around
             Vector3 newDir = RotationAngles.randomDir();
             transform.eulerAngles = newDir;

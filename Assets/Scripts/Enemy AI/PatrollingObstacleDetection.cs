@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrollingPlayerDetection : MonoBehaviour
+public class PatrollingObstacleDetection : MonoBehaviour
 {
     private EnemyAI enemyAI;
     private List<Collider2D> obstacles;

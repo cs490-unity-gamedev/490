@@ -10,7 +10,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private EnemyAIData enemyAIData;
     [SerializeField] private float detectionDelay = 0.05f;
 
-    PatrollingPlayerDetection patrollingPlayerDetection;
     [SerializeField] private ContextSolver movementDirectionSolver;
     private EnemyController enemyController;
     private Vector2 movement;
@@ -22,7 +21,6 @@ public class EnemyAI : MonoBehaviour
 
     private void Start() {
         enemyController = GetComponentInParent<EnemyController>();
-        patrollingPlayerDetection = GetComponentInChildren<PatrollingPlayerDetection>();
         // detecting player and walls around
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
