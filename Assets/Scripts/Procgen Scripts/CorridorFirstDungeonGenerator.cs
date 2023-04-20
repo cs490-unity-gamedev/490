@@ -36,7 +36,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             for (int i = 0; i < enemiesPerRoom; i++) {
                 Vector2Int posInRoom = roomPositions[UnityEngine.Random.Range(0, roomPositions.Count)];
                 Vector3Int tilePos = tilemapVisualizer.floorTilemap.WorldToCell((Vector3Int) posInRoom);
-                PhotonNetwork.Instantiate(enemyPrefab.name, tilePos, transform.rotation);
+                PhotonNetwork.InstantiateRoomObject(enemyPrefab.name, tilePos, transform.rotation);
             }
         }
     }

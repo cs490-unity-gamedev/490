@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class EnemyBulletTravel : MonoBehaviour
 {
     [SerializeField]
     private float bulletSpeed = 10f;
+    PhotonView view;
     // Start is called before the first frame update
     void Start()
     {
+        view = GetComponent<PhotonView>();
         Destroy(gameObject, 10f);
     }
 
@@ -22,9 +25,11 @@ public class EnemyBulletTravel : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
             collision.gameObject.GetComponent<PlayerController>().takeDamage(1);
-            Destroy(gameObject);
-        } else if (collision.gameObject.tag == "Wall") {
-            Destroy(gameObject);
         }
+        PhotonNetwork.Destroy(view);
+    }
+
+    private void OnDestroy() {
+        PhotonNetwork.Destroy(view);
     }
 }
