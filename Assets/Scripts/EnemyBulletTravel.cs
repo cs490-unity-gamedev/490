@@ -26,10 +26,15 @@ public class EnemyBulletTravel : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             collision.gameObject.GetComponent<PlayerController>().takeDamage(1);
         }
-        PhotonNetwork.Destroy(view);
+        Destroy(gameObject);
     }
 
     private void OnDestroy() {
-        PhotonNetwork.Destroy(view);
+        view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
+    }
+
+    [PunRPC]
+    private void destroyObjectRPC(int viewID) {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 }
