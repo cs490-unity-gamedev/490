@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  fireSpeed: 0.5
+  fireSpeed: 0.7
   bulletPrefab: {fileID: 4268803264299375687, guid: 6c349c074d934425dba3928021e5c214, type: 3}
   enemyAIData: {fileID: 0}
   patrolSpeed: 2

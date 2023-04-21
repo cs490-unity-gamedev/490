@@ -33,11 +33,7 @@ public class EnemyController : MonoBehaviour
         // use rb to manipulate mvm and rotation of object
         rb = this.GetComponent<Rigidbody2D>();
         view = GetComponent<PhotonView>();
-        
-        playerDetectionCollider = gameObject.transform.GetChild(0).transform;
-        obstacleDetectionCollider = gameObject.transform.GetChild(1).transform;
 
-        // start shooting coroutine
         bulletTransform = gameObject.transform.GetChild(0).transform;
     }
 

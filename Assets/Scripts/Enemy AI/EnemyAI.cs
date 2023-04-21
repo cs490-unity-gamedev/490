@@ -34,7 +34,7 @@ public class EnemyAI : MonoBehaviour
     private void Update() {
         // enemy AI movement based on target player availability
         if (enemyAIData.currentTargetPlayer != null) {
-            // enemyController.shoot();
+            enemyController.shoot();
             movement = movementDirectionSolver.GetDirectionToMove(steeringBehaviors, enemyAIData);
         } 
         else if (enemyAIData.GetTargetsCount() > 0) {
