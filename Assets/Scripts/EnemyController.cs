@@ -10,10 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float fireSpeed = 0.5f;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private EnemyAIData enemyAIData;
-    private Transform leftBulletTransform;
-    private Transform rightBulletTransform;
-    private Transform playerDetectionCollider;
-    private Transform obstacleDetectionCollider;
+    private Transform bulletTransform;
     PatrollingObstacleDetection patrollingObstacleDetection;
 
     private Rigidbody2D rb; // reference for this object's Rigidbody2D
@@ -41,8 +38,7 @@ public class EnemyController : MonoBehaviour
         obstacleDetectionCollider = gameObject.transform.GetChild(1).transform;
 
         // start shooting coroutine
-        leftBulletTransform = gameObject.transform.GetChild(2).transform;
-        rightBulletTransform = gameObject.transform.GetChild(3).transform;
+        bulletTransform = gameObject.transform.GetChild(0).transform;
     }
 
     public void takeDamage(int damage) {
@@ -88,8 +84,7 @@ public class EnemyController : MonoBehaviour
     public void shoot() {
         if (canFire) {
             canFire = false;
-            Instantiate(bulletPrefab, leftBulletTransform.position, leftBulletTransform.rotation);
-            Instantiate(bulletPrefab, rightBulletTransform.position, rightBulletTransform.rotation);
+            GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, bulletTransform.position, bulletTransform.rotation);
         } else {
             firingTimer += Time.deltaTime;
             if (firingTimer >= fireSpeed) {
