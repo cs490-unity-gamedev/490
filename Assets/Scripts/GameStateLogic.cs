@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Photon.Pun;
 
 public class GameStateLogic : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class GameStateLogic : MonoBehaviour
         isPaused = false;
         onPauseStatusChange?.Invoke();
         // TODO: currently have hard-coded 1
-        SceneManager.LoadScene("Loading");
+        PhotonNetwork.LoadLevel("Loading");
     }
 
     public void quitGame() {

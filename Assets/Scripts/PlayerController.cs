@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
         // could instantiate an explosion animation here later
         view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
         // load game over screen
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("GameOver");
     }
 
     [PunRPC]
