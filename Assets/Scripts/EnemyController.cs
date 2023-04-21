@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     public Transform targetPlayer = null;
     private bool canFire = true;
     private float firingTimer = 0f;
+    PhotonView view;
 
     void Awake() {
         patrollingObstacleDetection = GetComponentInChildren<PatrollingObstacleDetection>();
@@ -34,6 +35,7 @@ public class EnemyController : MonoBehaviour
     {
         // use rb to manipulate mvm and rotation of object
         rb = this.GetComponent<Rigidbody2D>();
+        view = GetComponent<PhotonView>();
         
         playerDetectionCollider = gameObject.transform.GetChild(0).transform;
         obstacleDetectionCollider = gameObject.transform.GetChild(1).transform;
@@ -53,10 +55,15 @@ public class EnemyController : MonoBehaviour
 
     private void Die() {
         // could instantiate an explosion animation here later
-        PhotonNetwork.Destroy(gameObject);
+        view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
         // invoke to increase player score
         onEnemyDeath?.Invoke();
         // logic.addScore(1);
+    }
+
+    [PunRPC]
+    private void destroyObjectRPC(int viewID) {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 
     public void chasePlayer(Vector2 direction) {
