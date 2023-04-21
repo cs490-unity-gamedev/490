@@ -9,7 +9,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int health = 3;
     [SerializeField] private float fireSpeed = 0.5f;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private EnemyAIData enemyAIData;
     private Transform bulletTransform;
     PatrollingObstacleDetection patrollingObstacleDetection;
 
@@ -21,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public Transform targetPlayer = null;
     private bool canFire = true;
     private float firingTimer = 0f;
+    private float spaceBetween = 1.5f;
     PhotonView view;
 
     void Awake() {
@@ -58,13 +58,16 @@ public class EnemyController : MonoBehaviour
         PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 
-    public void chasePlayer(Vector2 direction) {
-        // calculate the angle btwn enemy obj and player obj
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // set RigidBody's rotation
-        rb.rotation = angle;
+    public void chasePlayer(Vector2 direction, Transform target) {
+        if (Vector2.Distance(target.position, transform.position) >= spaceBetween) {
+            // calculate the angle btwn enemy obj and player obj
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            // set RigidBody's rotation
+            rb.rotation = angle;
 
-        rb.MovePosition((Vector2)transform.position + (direction * chaseSpeed * Time.deltaTime));
+            rb.MovePosition((Vector2)transform.position + (direction * chaseSpeed * Time.deltaTime));
+        }
+        
     }
 
     public void patrol() {

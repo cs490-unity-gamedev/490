@@ -34,7 +34,10 @@ public class EnemyAI : MonoBehaviour
     private void Update() {
         // enemy AI movement based on target player availability
         if (enemyAIData.currentTargetPlayer != null) {
-            enemyController.shoot();
+            if (gameObject.tag == "Enemy") {
+                // don't shoot if current gameObject is Flocking Units Manager
+                enemyController.shoot();
+            }
             movement = movementDirectionSolver.GetDirectionToMove(steeringBehaviors, enemyAIData);
         } 
         else if (enemyAIData.GetTargetsCount() > 0) {
@@ -49,7 +52,7 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate() {
         if (enemyAIData.currentTargetPlayer != null) {
-            enemyController.chasePlayer(movement);
+            enemyController.chasePlayer(movement, enemyAIData.currentTargetPlayer);
         }
     }
 }

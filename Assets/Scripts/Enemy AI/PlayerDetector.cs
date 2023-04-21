@@ -24,7 +24,7 @@ public class PlayerDetector : Detector
             // make sure that collider we see is on the "Player" layer
             if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0) {
                 // print("player seen");
-                Debug.DrawRay(transform.position, direction * playerDetectionRange, Color.magenta);
+                // Debug.DrawRay(transform.position, direction * playerDetectionRange, Color.magenta);
                 colliders = new List<Transform>() { playerCollider.transform };
             } else {
                 colliders = null;

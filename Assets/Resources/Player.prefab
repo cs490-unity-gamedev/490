@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currHealth: 10
-  damageEnabled: 1
+  damageEnabled: 0
   firingEnabled: 1
   moveSpeed: 7
   fireSpeed: 0.3
