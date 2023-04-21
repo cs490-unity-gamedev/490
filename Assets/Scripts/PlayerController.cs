@@ -110,13 +110,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public void takeDamage(int damage) {
-        if (damageEnabled) {
-            currHealth -= damage;
-            onPlayerDamaged?.Invoke();
-            print("health: " + currHealth);
-            
-            if (currHealth <= 0) {
-                Die();
+        if (view.IsMine) {
+            if (damageEnabled) {
+                currHealth -= damage;
+                onPlayerDamaged?.Invoke();
+                print("health: " + currHealth);
+                
+                if (currHealth <= 0) {
+                    Die();
+                }
             }
         }
     }
@@ -126,11 +128,12 @@ public class PlayerController : MonoBehaviour
         view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
         // load game over screen
         SceneManager.LoadScene("GameOver");
+        PhotonNetwork.Disconnect();
     }
 
     [PunRPC]
     private void destroyObjectRPC(int viewID) {
-        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
-        PhotonNetwork.Disconnect();
+        PhotonNetwork.Destroy(gameObject);
+        // PhotonNetwork.Disconnect();
     }
 }
