@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Photon.Pun;
 
 public class GameplayHUDScript : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
     [SerializeField] private HealthUIScript healthUIScript;
     [SerializeField] private PauseUIScript pauseUIScript;
     [SerializeField] private GameStateLogic gameStateLogic;
@@ -53,8 +54,16 @@ public class GameplayHUDScript : MonoBehaviour
         playerScoreNum = root.Q<Label>(playerScoreNumName);
 
         pauseMenu.style.display = DisplayStyle.None;
-        healthUIScript.drawHearts(root, playerController);
         // initializeButtonLogic();
+    }
+
+    private void Start() {
+        foreach (PlayerController playerControl in FindObjectsOfType<PlayerController>()) {
+            if (playerControl.gameObject.GetComponent<PhotonView>().IsMine) {
+                playerController = playerControl;
+            }
+        }
+        healthUIScript.drawHearts(root, playerController);
     }
 
     private void updateDisplayedScore() {

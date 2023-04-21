@@ -123,8 +123,14 @@ public class PlayerController : MonoBehaviour
 
     private void Die() {
         // could instantiate an explosion animation here later
-        Destroy(gameObject);
+        view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
         // load game over screen
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    [PunRPC]
+    private void destroyObjectRPC(int viewID) {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+        PhotonNetwork.Disconnect();
     }
 }
