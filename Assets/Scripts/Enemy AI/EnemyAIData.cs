@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyAIData : MonoBehaviour
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     public List<Transform> targets = null;
     public Collider2D[] obstacles = null;
 

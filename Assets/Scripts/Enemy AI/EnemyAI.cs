@@ -5,6 +5,11 @@ using UnityEngine.Events;
 
 public class EnemyAI : MonoBehaviour
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     [SerializeField] private List<SteeringBehavior> steeringBehaviors;
     [SerializeField] private List<Detector> detectors;
     [SerializeField] private EnemyAIData enemyAIData;

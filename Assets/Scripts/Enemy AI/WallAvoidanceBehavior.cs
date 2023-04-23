@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WallAvoidanceBehavior : SteeringBehavior
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     [SerializeField] private float radius = 2f, agentColliderSize = 0.6f;
     [SerializeField] private bool showGizmo = true;
     // gizmo parameters

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ContextSolver : MonoBehaviour
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     [SerializeField] private bool showGizmos = true;
 
     // gizmo parameters

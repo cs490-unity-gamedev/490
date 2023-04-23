@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class SeekBehavior : SteeringBehavior
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     [SerializeField] private float targetPlayerReachedThreshold = 0.5f;
     [SerializeField] private bool showGizmo = true;
     bool reachedLastTargetPlayer = true;

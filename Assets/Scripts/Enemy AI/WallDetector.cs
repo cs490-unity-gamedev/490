@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WallDetector : Detector
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     [SerializeField] private float detectionRadius = 2;
     [SerializeField] private LayerMask layerMask; // layer mask representing the obstacles
     [SerializeField] private bool showGizmos = true;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerDetector : Detector
 {
+    //-----------------------------------------------------------------------
+    // Adapted from "Context Steering AI" series
+    // Author: Sunny Valley Studio
+    //-----------------------------------------------------------------------
+
     [SerializeField] private float playerDetectionRange = 5;
     [SerializeField] private LayerMask wallsLayerMask, playerLayerMask;
     [SerializeField] private bool showGizmos = false;
