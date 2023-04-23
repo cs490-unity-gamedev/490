@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class FlockUnit : MonoBehaviour
 {
@@ -11,10 +12,16 @@ public class FlockUnit : MonoBehaviour
 
     public Collider2D unitCollider;
 
+    // EnemyController
+    public static event System.Action onEnemyDeath;
+    [SerializeField] private int health = 1;
+    PhotonView view;
+
     // Start is called before the first frame update
     void Start()
     {
         unitCollider = GetComponent<Collider2D>();
+        view = GetComponent<PhotonView>();
     }
 
     public void Move(Vector2 velocity)
@@ -22,4 +29,25 @@ public class FlockUnit : MonoBehaviour
         transform.up = velocity;
         transform.position += (Vector3)velocity * Time.deltaTime;
     }
+
+    public void takeDamage(int damage) {
+        health -= damage;
+        
+        if (health <= 0) {
+            gameObject.SetActive(false);
+        }
+    }
+
+    // private void Die() {
+    //     // could instantiate an explosion animation here later
+    //     view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
+    //     // invoke to increase player score
+    //     onEnemyDeath?.Invoke();
+    //     // logic.addScore(1);
+    // }
+
+    // [PunRPC]
+    // private void destroyObjectRPC(int viewID) {
+    //     PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+    // }
 }

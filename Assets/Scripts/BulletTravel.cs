@@ -25,7 +25,9 @@ public class BulletTravel : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             collision.gameObject.GetComponent<EnemyController>().takeDamage(1);
-        } 
+        }  else if (collision.gameObject.tag == "Flock") {
+            collision.gameObject.GetComponent<FlockUnit>().takeDamage(1);
+        }
         Destroy(gameObject);
     }
 

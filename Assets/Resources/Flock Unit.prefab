@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6052416767551671646}
   m_Layer: 0
   m_Name: Flock Unit
-  m_TagString: Untagged
+  m_TagString: Flock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCollider: {fileID: 0}
+  health: 1
 --- !u!212 &924577066823218561
 SpriteRenderer:
   m_ObjectHideFlags: 0
