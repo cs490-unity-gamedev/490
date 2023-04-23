@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 // populate flock w/ prefabs + handle iteration and execute behaviors on flock units
 public class Flock : MonoBehaviour
@@ -42,12 +43,11 @@ public class Flock : MonoBehaviour
 
         // initialize and instantiate the flock
         for (int i = 0; i < startingCount; i++) {
-            FlockUnit newUnit = Instantiate(
-                unitPrefab,
+            FlockUnit newUnit = PhotonNetwork.InstantiateRoomObject(
+                unitPrefab.name,
                 Random.insideUnitCircle * startingCount * UnitDensity,
-                Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), // rotation of unit
-                transform
-                );
+                Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f))
+                ).GetComponent<FlockUnit>();
             newUnit.name = "Unit " + i;
             // newUnit.Initialize(this);
             units.Add(newUnit);
