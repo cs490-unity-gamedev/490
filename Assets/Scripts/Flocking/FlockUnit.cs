@@ -30,6 +30,13 @@ public class FlockUnit : MonoBehaviour
         transform.position += (Vector3)velocity * Time.deltaTime;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") {
+            collision.gameObject.GetComponent<PlayerController>().takeDamage(1);
+        }
+        Die();
+    }
+
     public void takeDamage(int damage) {
         health -= damage;
         
