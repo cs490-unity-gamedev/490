@@ -34,20 +34,15 @@ public class FlockUnit : MonoBehaviour
         health -= damage;
         
         if (health <= 0) {
-            gameObject.SetActive(false);
+            Die();
         }
     }
 
-    // private void Die() {
-    //     // could instantiate an explosion animation here later
-    //     view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
-    //     // invoke to increase player score
-    //     onEnemyDeath?.Invoke();
-    //     // logic.addScore(1);
-    // }
-
-    // [PunRPC]
-    // private void destroyObjectRPC(int viewID) {
-    //     PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
-    // }
+    private void Die() {
+        // could instantiate an explosion animation here later
+        gameObject.SetActive(false);
+        // invoke to increase player score
+        onEnemyDeath?.Invoke();
+        // logic.addScore(1);
+    }
 }

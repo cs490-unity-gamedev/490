@@ -5,15 +5,7 @@ using Photon.Pun;
 
 public class BulletTravel : MonoBehaviour
 {
-    [SerializeField]
-    private float bulletSpeed = 10f;
-    PhotonView view;
-    // Start is called before the first frame update
-    void Start()
-    {
-        view = GetComponent<PhotonView>();
-        Destroy(gameObject, 10f);
-    }
+    [SerializeField] private float bulletSpeed = 10f;
 
     // Update is called once per frame
     void Update()
@@ -28,15 +20,6 @@ public class BulletTravel : MonoBehaviour
         }  else if (collision.gameObject.tag == "Flock") {
             collision.gameObject.GetComponent<FlockUnit>().takeDamage(1);
         }
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy() {
-        view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
-    }
-
-    [PunRPC]
-    private void destroyObjectRPC(int viewID) {
-        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+        gameObject.SetActive(false);
     }
 }

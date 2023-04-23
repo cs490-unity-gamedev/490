@@ -7,13 +7,6 @@ public class EnemyBulletTravel : MonoBehaviour
 {
     [SerializeField]
     private float bulletSpeed = 10f;
-    PhotonView view;
-    // Start is called before the first frame update
-    void Start()
-    {
-        view = GetComponent<PhotonView>();
-        Destroy(gameObject, 10f);
-    }
 
     // Update is called once per frame
     void Update()
@@ -26,15 +19,6 @@ public class EnemyBulletTravel : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             collision.gameObject.GetComponent<PlayerController>().takeDamage(1);
         }
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy() {
-        view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
-    }
-
-    [PunRPC]
-    private void destroyObjectRPC(int viewID) {
-        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -47,15 +47,10 @@ public class EnemyController : MonoBehaviour
 
     private void Die() {
         // could instantiate an explosion animation here later
-        view.RPC("destroyObjectRPC", RpcTarget.MasterClient, view.ViewID);
+        gameObject.SetActive(false);
         // invoke to increase player score
         onEnemyDeath?.Invoke();
         // logic.addScore(1);
-    }
-
-    [PunRPC]
-    private void destroyObjectRPC(int viewID) {
-        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 
     public void chasePlayer(Vector2 direction, Transform target) {
