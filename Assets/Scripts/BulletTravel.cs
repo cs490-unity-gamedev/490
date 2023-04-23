@@ -6,6 +6,12 @@ using Photon.Pun;
 public class BulletTravel : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 10f;
+    PhotonView view;
+
+    void Start()
+    {
+        view = GetComponent<PhotonView>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -20,6 +26,15 @@ public class BulletTravel : MonoBehaviour
         }  else if (collision.gameObject.tag == "Flock") {
             collision.gameObject.GetComponent<FlockUnit>().takeDamage(1);
         }
-        gameObject.SetActive(false);
+        Die();
+    }
+
+    private void Die() {
+        view.RPC("disableObjectRPC", RpcTarget.AllBuffered, view.ViewID);
+    }
+
+    [PunRPC]
+    private void disableObjectRPC(int viewID) {
+        PhotonView.Find(viewID).gameObject.SetActive(false);
     }
 }

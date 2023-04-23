@@ -7,6 +7,12 @@ public class EnemyBulletTravel : MonoBehaviour
 {
     [SerializeField]
     private float bulletSpeed = 10f;
+    PhotonView view;
+
+    void Start()
+    {
+        view = GetComponent<PhotonView>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,6 +25,15 @@ public class EnemyBulletTravel : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             collision.gameObject.GetComponent<PlayerController>().takeDamage(1);
         }
-        gameObject.SetActive(false);
+        Die();
+    }
+
+    private void Die() {
+        view.RPC("disableObjectRPC", RpcTarget.AllBuffered, view.ViewID);
+    }
+
+    [PunRPC]
+    private void disableObjectRPC(int viewID) {
+        PhotonView.Find(viewID).gameObject.SetActive(false);
     }
 }

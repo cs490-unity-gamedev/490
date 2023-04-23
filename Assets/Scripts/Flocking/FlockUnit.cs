@@ -40,9 +40,14 @@ public class FlockUnit : MonoBehaviour
 
     private void Die() {
         // could instantiate an explosion animation here later
-        gameObject.SetActive(false);
+        view.RPC("disableObjectRPC", RpcTarget.AllBuffered, view.ViewID);
         // invoke to increase player score
         onEnemyDeath?.Invoke();
         // logic.addScore(1);
+    }
+
+    [PunRPC]
+    private void disableObjectRPC(int viewID) {
+        PhotonView.Find(viewID).gameObject.SetActive(false);
     }
 }
