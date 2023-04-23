@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+    //-----------------------------------------------------------------------
+    // Adapted from "Procedural Dungeon Generation in Unity 2d" series
+    // Author: Sunny Valley Studios
+    //-----------------------------------------------------------------------
+
 public static class ProceduralGenerationAlgorithms
 {
     public static HashSet<Vector2Int> simpleRandomWalk(Vector2Int startPos, int walkLength) {

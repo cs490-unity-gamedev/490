@@ -5,6 +5,11 @@ using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+    //-----------------------------------------------------------------------
+    // Adapted from "Procedural Dungeon Generation in Unity 2d" series
+    // Author: Sunny Valley Studios
+    //-----------------------------------------------------------------------
+
 public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
     [SerializeField] private int corridorLength = 14, corridorCount = 5;

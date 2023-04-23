@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+    //-----------------------------------------------------------------------
+    // Adapted from "Procedural Dungeon Generation in Unity 2d" series
+    // Author: Sunny Valley Studios
+    //-----------------------------------------------------------------------
+
 public static class WallGenerator
 {
     public static void createWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer) {

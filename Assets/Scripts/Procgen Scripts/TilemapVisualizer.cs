@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+    //-----------------------------------------------------------------------
+    // Adapted from "Procedural Dungeon Generation in Unity 2d" series
+    // Author: Sunny Valley Studios
+    //-----------------------------------------------------------------------
+
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField] public Tilemap floorTilemap, wallTilemap;

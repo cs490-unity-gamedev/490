@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+    //-----------------------------------------------------------------------
+    // Adapted from "Procedural Dungeon Generation in Unity 2d" series
+    // Author: Sunny Valley Studios
+    //-----------------------------------------------------------------------
+
 public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
     [SerializeField] protected SimpleRandomWalkScriptableObject randomWalkParameters;
