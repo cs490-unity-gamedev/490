@@ -43,14 +43,14 @@ public class Flock : MonoBehaviour
 
         // initialize and instantiate the flock
         for (int i = 0; i < startingCount; i++) {
-            FlockUnit newUnit = PhotonNetwork.InstantiateRoomObject(
+            GameObject newUnit = PhotonNetwork.InstantiateRoomObject(
                 unitPrefab.name,
                 Random.insideUnitCircle * startingCount * UnitDensity,
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f))
-                ).GetComponent<FlockUnit>();
+                );
             newUnit.name = "Unit " + i;
             // newUnit.Initialize(this);
-            units.Add(newUnit);
+            units.Add(newUnit.GetComponent<FlockUnit>());
         }
     }
 

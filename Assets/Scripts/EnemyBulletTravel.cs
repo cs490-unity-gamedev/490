@@ -29,7 +29,9 @@ public class EnemyBulletTravel : MonoBehaviour
     }
 
     private void Die() {
-        view.RPC("disableObjectRPC", RpcTarget.AllBuffered, view.ViewID);
+        if (view) {
+            view.RPC("disableObjectRPC", RpcTarget.AllBuffered, view.ViewID);
+        }
     }
 
     [PunRPC]
