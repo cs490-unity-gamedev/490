@@ -1,4 +1,6 @@
 # Error 490
+Error 490 is a 2D, top-down, bullet hell shooter made in the Unity game engine as part of CPSC 490 at Yale University.
+
 [Project Proposal Link](https://docs.google.com/document/d/1PstmsY7LsY0eRR9c_-MilDjLpJQR41U93yHbYdIdhLE/edit?usp=sharing)
 
 # Getting Started
