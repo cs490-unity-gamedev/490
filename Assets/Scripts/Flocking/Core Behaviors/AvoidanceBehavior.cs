@@ -7,7 +7,7 @@ public class AvoidanceBehavior : FlockBehavior
 {
     //-----------------------------------------------------------------------
     // Adapted from "Flocking Algorithm in Unity" series
-    // Author: Board To Bits Games
+    // Author: Board To Bits Games, 2019
     //-----------------------------------------------------------------------
 
     public override Vector2 calculateMove(FlockUnit unit, List<Transform> context, Flock flock) {
@@ -19,7 +19,6 @@ public class AvoidanceBehavior : FlockBehavior
         // add all points together and average
         Vector2 avoidanceMove = Vector2.zero;
         int numInAvoidRadius = 0;
-        // List<Transform> filteredContext = (filter == null) ? context : filter.Filter(unit, context);
         foreach (Transform item in context) {
             if (Vector2.SqrMagnitude(item.position - unit.transform.position) < flock.squareAvoidanceRadius) {
                 numInAvoidRadius++;

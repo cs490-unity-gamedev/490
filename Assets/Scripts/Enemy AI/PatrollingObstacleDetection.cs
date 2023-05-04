@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PatrollingObstacleDetection : MonoBehaviour
 {
-    //-----------------------------------------------------------------------
-    // Adapted from "Context Steering AI" series
-    // Author: Sunny Valley Studio
-    //-----------------------------------------------------------------------
-
     private EnemyAI enemyAI;
     private List<Collider2D> obstacles;
     public bool obstacleDetectedWhilePatrolling = false;

@@ -7,7 +7,7 @@ public class FlockUnit : MonoBehaviour
 {
     //-----------------------------------------------------------------------
     // Adapted from "Flocking Algorithm in Unity" series
-    // Author: Board To Bits Games
+    // Author: Board To Bits Games, 2019
     //-----------------------------------------------------------------------
 
     public Collider2D unitCollider;

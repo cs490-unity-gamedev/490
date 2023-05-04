@@ -6,7 +6,7 @@ public class WallAvoidanceBehavior : SteeringBehavior
 {
     //-----------------------------------------------------------------------
     // Adapted from "Context Steering AI" series
-    // Author: Sunny Valley Studio
+    // Author: Sunny Valley Studio, 2022
     //-----------------------------------------------------------------------
 
     [SerializeField] private float radius = 2f, agentColliderSize = 0.6f;

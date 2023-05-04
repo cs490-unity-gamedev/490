@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
             if (damageEnabled) {
                 currHealth -= damage;
                 onPlayerDamaged?.Invoke();
-                print("health: " + currHealth);
                 
                 if (currHealth <= 0) {
                     Die();

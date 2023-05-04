@@ -6,7 +6,7 @@ public class PlayerDetector : Detector
 {
     //-----------------------------------------------------------------------
     // Adapted from "Context Steering AI" series
-    // Author: Sunny Valley Studio
+    // Author: Sunny Valley Studio, 2022
     //-----------------------------------------------------------------------
 
     [SerializeField] private float playerDetectionRange = 5;
@@ -28,7 +28,6 @@ public class PlayerDetector : Detector
 
             // make sure that collider we see is on the "Player" layer
             if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0) {
-                // print("player seen");
                 // Debug.DrawRay(transform.position, direction * playerDetectionRange, Color.magenta);
                 colliders = new List<Transform>() { playerCollider.transform };
             } else {
@@ -36,7 +35,6 @@ public class PlayerDetector : Detector
             }
         } else {
             // enemy doesn't see player
-            // print("no see player!");
             colliders = null;
         }
         enemyAIData.targets = colliders;

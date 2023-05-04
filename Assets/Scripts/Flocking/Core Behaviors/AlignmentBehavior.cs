@@ -7,7 +7,7 @@ public class AlignmentBehavior : FlockBehavior
 {
     //-----------------------------------------------------------------------
     // Adapted from "Flocking Algorithm in Unity" series
-    // Author: Board To Bits Games
+    // Author: Board To Bits Games, 2019
     //-----------------------------------------------------------------------
 
     public override Vector2 calculateMove(FlockUnit unit, List<Transform> context, Flock flock) {
@@ -18,7 +18,6 @@ public class AlignmentBehavior : FlockBehavior
 
         // add all points together and average
         Vector2 alignmentMove = Vector2.zero;
-        // List<Transform> filteredContext = (filter == null) ? context : filter.Filter(unit, context);
         foreach (Transform item in context) {
             alignmentMove += (Vector2)item.transform.up;
         }

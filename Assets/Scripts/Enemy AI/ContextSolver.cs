@@ -6,7 +6,7 @@ public class ContextSolver : MonoBehaviour
 {
     //-----------------------------------------------------------------------
     // Adapted from "Context Steering AI" series
-    // Author: Sunny Valley Studio
+    // Author: Sunny Valley Studio, 2022
     //-----------------------------------------------------------------------
 
     [SerializeField] private bool showGizmos = true;

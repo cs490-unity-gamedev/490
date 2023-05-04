@@ -8,7 +8,7 @@ public class Flock : MonoBehaviour
 {
     //-----------------------------------------------------------------------
     // Adapted from "Flocking Algorithm in Unity" series
-    // Author: Board To Bits Games
+    // Author: Board To Bits Games, 2019
     //-----------------------------------------------------------------------
 
     [SerializeField] FlockUnit unitPrefab;

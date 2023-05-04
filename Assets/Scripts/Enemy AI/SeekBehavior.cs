@@ -7,7 +7,7 @@ public class SeekBehavior : SteeringBehavior
 {
     //-----------------------------------------------------------------------
     // Adapted from "Context Steering AI" series
-    // Author: Sunny Valley Studio
+    // Author: Sunny Valley Studio, 2022
     //-----------------------------------------------------------------------
 
     [SerializeField] private float targetPlayerReachedThreshold = 0.5f;
@@ -76,7 +76,6 @@ public class SeekBehavior : SteeringBehavior
                 if (reachedLastTargetPlayer == false) {
                     Gizmos.color = Color.red;
                     Gizmos.DrawSphere(targetPositionCached, 0.1f);
-                    print(targetPositionCached);
                 }
             }
         }

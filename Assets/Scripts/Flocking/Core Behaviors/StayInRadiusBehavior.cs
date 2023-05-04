@@ -7,7 +7,7 @@ public class StayInRadiusBehavior : FlockBehavior
 {
     //-----------------------------------------------------------------------
     // Adapted from "Flocking Algorithm in Unity" series
-    // Author: Board To Bits Games
+    // Author: Board To Bits Games, 2019
     //-----------------------------------------------------------------------
 
     [SerializeField] Vector2 center;

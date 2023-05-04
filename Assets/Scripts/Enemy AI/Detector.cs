@@ -6,7 +6,7 @@ public abstract class Detector : MonoBehaviour
 {
     //-----------------------------------------------------------------------
     // Adapted from "Context Steering AI" series
-    // Author: Sunny Valley Studio
+    // Author: Sunny Valley Studio, 2022
     //-----------------------------------------------------------------------
 
     public abstract void Detect(EnemyAIData enemyAIData);
